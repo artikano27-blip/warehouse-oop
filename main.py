@@ -17,7 +17,7 @@ class NormalItem():
     @price.setter
     def price(self, price):
         if price < 0:
-            raise(f"Ошибка! Цена '{self.name}' не может быть меньше 0 рублей!")
+            raise (f"Ошибка! Цена '{self.name}' не может быть меньше 0 рублей!")
         else:
             self.__price = price
 
@@ -67,8 +67,21 @@ class Warehouse():
 
 
 # Создаем Сущность склада
-
+my_warehouse = Warehouse()
 # Создаем Сущности товаров
-water = NormalItem("Святой источник", 10 ,100)
-print(water)
-
+water = NormalItem("Святой Источник 1.5л", price=45, quantity=100)
+glasses = FragileItem("Набор бокалов", price=800, quantity=20, fragility_level=4)
+milk = PerishableItem("Молоко Простоквашино", price=90, quantity=50, expiration_days=5)
+# Принимаем товар
+my_warehouse.add_item(water)
+my_warehouse.add_item(glasses)
+my_warehouse.add_item(milk)
+# Отступ для красоты
+print()
+# Пробегаемся по товарам, готовим к отгрузке
+for item in my_warehouse.items:
+    print(item)
+    item.prepare_for_shipping()
+    print("-" * 70)
+# Выводим сумму товаров на складе
+my_warehouse.get_total_value()
